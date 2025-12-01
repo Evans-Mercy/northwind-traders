@@ -8,12 +8,14 @@ public class Main {
 
         Statement statement = connection.createStatement();
 
-        String query = "SELECT * FROM products";
+        String query = """
+                SELECT ProductID, ProductName, UnitPrice, UnitsInStock
+                FROM products""";
 
         ResultSet results = statement.executeQuery(query);
 
         while (results.next()) {
-            String product = results.getString("ProductName");
+            String product = results.getString("ProductID");
             System.out.println(product);
         }
         connection.close();
