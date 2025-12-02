@@ -1,3 +1,5 @@
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.Connection;
 import java.sql.*;
 import java.util.Scanner;
@@ -22,7 +24,14 @@ public class Main {
         String password = "yearup";
 
 
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+        BasicDataSource dataSource = new BasicDataSource();
+
+        dataSource.setUrl("jdbc:mysql://localhost:3306/northwind");
+        dataSource.setUsername("root");
+        dataSource.setPassword("yearup");
+        try (
+                //Connection connection = DriverManager.getConnection(url, user, password)) {
+                Connection connection = dataSource.getConnection()) {
 
             if (choice == 1) {
                 Statement statement = connection.createStatement();
